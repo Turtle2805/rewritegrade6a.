@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Thi Tiếng Anh Toàn Diện - Ms Lê Hằng English</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(-45deg, #8854C0, #FDCB6E, #00C9A7, #FF7675);
+            --primary-color: #8854C0;
+            --yellow-color: #FDCB6E;
+            --turquoise-color: #00C9A7;
+            --correct-color: #00D26A;
+            --correct-shadow: #00A352;
+            --wrong-color: #FF4757;
+            --wrong-shadow: #D63031;
+            --card-bg: rgba(255, 255, 255, 0.96);
+            --text-main: #2D3436;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--primary-gradient);
+            background-size: 400% 400%;
+            animation: gradientAnim 14s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+            padding: 20px 12px;
+            color: var(--text-main);
+        }
+
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Lớp họa tiết ngôi sao, hoa lá bay lơ lửng độc lập */
+        .bg-patterns {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.12;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M9 24c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4-4-1.79-4-4zm32 16c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4-4-1.79-4-4zM12 50l3-3 3 3-3 3-3-3zm32-34l3-3 3 3-3 3-3-3z' fill='%23ffffff'/%3E%3C/svg%3E");
+            animation: patternScroll 25s linear infinite;
+        }
+
+        @keyframes patternScroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        .container {
+            max-width: 760px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 6px 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            position: relative;
+        }
+        .author-tag {
+            font-size: 0.9rem;
+            font-weight: 900;
+            color: #6c5ce7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notice-box {
+            background: #FFEAA7;
+            border: 3px dashed #FF9F43;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 0 #FAB1A0;
+            text-align: center;
+        }
+        .notice-title {
+            color: #D63031;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        .notice-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #2D3436;
+            font-weight: 700;
+        }
+
+        .quiz-card {
+            background: var(--card-bg);
+            border-radius: 22px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            border: 3px solid #FFF;
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed #E2E8F0;
+            padding-bottom: 10px;
+        }
+        .badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: 900;
+            font-size: 0.85rem;
+            margin-right: 12px;
+            white-space: nowrap;
+            box-shadow: 0 3px 0 #6c5ce7;
+            margin-top: 2px;
+        }
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: #2D3436;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .option-btn {
+            background: #FFFFFF;
+            border: 3px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 12px 18px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 0 5px 0 #E2E8F0;
+            color: #4A5568;
+        }
+        .option-btn:hover:not(.disabled) {
+            transform: translateY(-2px) scale(1.002);
+            box-shadow: 0 7px 0 #CBD5E1;
+            border-color: #CBD5E1;
+            color: #1A202C;
+        }
+        .option-btn:active:not(.disabled) {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #CBD5E1;
+        }
+        
+        .option-btn.correct {
+            background-color: var(--correct-color) !important;
+            color: white !important;
+            border-color: var(--correct-shadow) !important;
+            box-shadow: 0 3px 0 var(--correct-shadow) !important;
+        }
+        .option-btn.wrong {
+            background-color: var(--wrong-color) !important;
+            color: white !important;
+            border-color: var(--wrong-shadow) !important;
+            box-shadow: 0 3px 0 var(--wrong-shadow) !important;
+        }
+        .option-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
+
+        .explanation-box {
+            margin-top: 18px;
+            background: #FFFDF2;
+            border-left: 6px solid #F1C40F;
+            border-radius: 14px;
+            padding: 16px;
+            display: none;
+            animation: expandReveal 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+        }
+        @keyframes expandReveal {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exp-title {
+            font-weight: 900;
+            color: #B33771;
+            margin-bottom: 8px;
+            font-size: 0.98rem;
+        }
+        .exp-section {
+            margin-bottom: 8px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+        .exp-section strong {
+            color: #2C3A47;
+        }
+        .sub-options-desc {
+            margin-left: 8px;
+            border-left: 2px dashed #CBD5E1;
+            padding-left: 10px;
+            margin-top: 4px;
+            background: rgba(0,0,0,0.01);
+        }
+
+        .shake {
+            animation: shakeCard 0.4s ease-in-out;
+        }
+        @keyframes shakeCard {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        .submit-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+        .main-submit-btn {
+            background: #00D26A;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 900;
+            padding: 15px 42px;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #00A352, 0 12px 24px rgba(0,0,0,0.15);
+            transition: all 0.15s;
+        }
+        .main-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0 #00A352, 0 14px 26px rgba(0,0,0,0.2);
+        }
+        .main-submit-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #00A352;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.55);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; visibility: hidden; opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .popup-box {
+            background: white; border-radius: 26px; padding: 28px;
+            max-width: 500px; width: 92%; text-align: center;
+            box-shadow: 0 18px 36px rgba(0,0,0,0.25);
+            transform: scale(0.85); transition: all 0.3s ease;
+            border: 5px solid var(--primary-color);
+        }
+        .popup-overlay.show { visibility: visible; opacity: 1; }
+        .popup-overlay.show .popup-box { transform: scale(1); }
+        .score-num { font-size: 3.5rem; font-weight: 900; color: var(--primary-color); margin: 12px 0; }
+        .teacher-comment { background: #F8F9FA; padding: 15px; border-radius: 15px; font-weight: 700; color: #2D3436; margin-bottom: 20px; line-height: 1.55; border: 1px solid #E2E8F0; }
+        .restart-btn { background: var(--turquoise-color); color: white; border: none; padding: 12px 28px; font-weight: 900; border-radius: 15px; box-shadow: 0 4px 0 #00A88F; cursor: pointer; font-size: 1rem; }
+
+        #confetti-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-patterns"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="container">
+        
+        <header>
+            <div class="author-tag">Giáo viên tạo: Ms Lê Hằng English</div>
+        </header>
+
+        <div class="notice-box">
+            <div class="notice-title">⚠️ LỜI NHẮC CỰC KỲ QUAN TRỌNG ⚠️</div>
+            <div class="notice-content">
+                Chỉ có đọc kỹ giải thích ngay sau mỗi câu, sau đó ghi lại từ vựng/cấu trúc mới vào vở để học thì mới thực sự giỏi lên.<br>
+                Làm cho xong mà không đọc giải thích hay đọc qua loa không ghi chép thì chỉ tốn thời gian vô ích!<br>
+                <strong>* Kéo tới đâu, làm tới đó! *</strong>
+            </div>
+        </div>
+
+        <div id="quiz-container"></div>
+
+        <div class="submit-container">
+            <button class="main-submit-btn" onclick="calculateFinalScore()">🎉 Nộp Bài Xem Kết Quả 🎉</button>
+        </div>
+
+    </div>
+
+    <div class="popup-overlay" id="result-modal">
+        <div class="popup-box">
+            <h2 style="color: #6c5ce7;">✨ Kết Quả Kiểm Tra ✨</h2>
+            <div class="score-num" id="score-text">0 / 50</div>
+            <div class="teacher-comment" id="comment-text">Nhận xét từ cô giáo...</div>
+            <button class="restart-btn" onclick="reloadQuizEngine()">Làm Lại Đề Thi 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        // Cơ sở dữ liệu chứa toàn bộ 50 câu hỏi đầy đủ không cắt xén
+        const quizDatabase = [
+            {
+                id: 1,
+                prompt: "It is not good for you to stay up too late.<br>→ You shouldn't ....................................",
+                options: [
+                    { key: "A", text: "You shouldn't stay up too late." },
+                    { key: "B", text: "You shouldn't to stay up too late." },
+                    { key: "C", text: "You shouldn't staying up too late." },
+                    { key: "D", text: "You shouldn't stayed up too late." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Bạn thức quá khuya thì không tốt đâu.",
+                    vocab: [
+                        "A. You shouldn't stay up too late: Bạn không nên thức quá khuya. (Đúng cấu trúc)",
+                        "B. Thừa từ 'to' đứng sau động từ khuyết thiếu.",
+                        "C. Chia động từ đuôi -ing là sai.",
+                        "D. Chia động từ dạng quá khứ phân từ là sai."
+                    ],
+                    whyCorrect: "Cấu trúc đưa ra lời khuyên tương đương: 'It is not good for sb to V' (Không tốt cho ai làm gì) biến đổi đồng nghĩa thành mẫu 'S + shouldn't + V-inf' (Ai đó không nên làm gì). Do đó phương án A chính xác.",
+                    whyIncorrect: "Các câu B, C, D đều vi phạm nguyên tắc chia động từ nguyên mẫu không 'to' sau động từ khuyết thiếu 'shouldn't'."
+                }
+            },
+            {
+                id: 2,
+                prompt: "My home town doesn’t have any buildings and theatres.<br>→ There ....................................",
+                options: [
+                    { key: "A", text: "There isn't any buildings and theatres in my home town." },
+                    { key: "B", text: "There aren't any buildings and theatres in my home town." },
+                    { key: "C", text: "There have no buildings and theatres in my home town." },
+                    { key: "D", text: "There don't have any buildings and theatres in my home town." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Quê hương của tôi không có bất kỳ tòa nhà hay rạp hát nào.",
+                    vocab: [
+                        "A. Dùng hệ động từ số ít 'isn't' cho danh từ số nhiều là sai.",
+                        "B. There aren't any buildings and theatres...: Không có tòa nhà hay rạp hát nào... (Đúng ngữ pháp số nhiều)",
+                        "C. Sai cấu trúc liên kết 'There have no'.",
+                        "D. Sai cấu trúc kết hợp từ ngữ pháp 'There don't have'."
+                    ],
+                    whyCorrect: "Cấu trúc chuyển đổi sở hữu sang tồn tại ở dạng phủ định: 'S + doesn't have + any + N số nhiều' viết lại thành mẫu 'There aren't any + N số nhiều + cụm vị trí'. Vì 'buildings and theatres' là số nhiều nên đi với 'aren't'.",
+                    whyIncorrect: "A sai hòa hợp số lượng. C và D dùng sai dạng thức vận hành của cấu trúc 'There be'."
+                }
+            },
+            {
+                id: 3,
+                prompt: "My brother walks to school.<br>→ My brother goes ....................................",
+                options: [
+                    { key: "A", text: "My brother goes to school by walking." },
+                    { key: "B", text: "My brother goes to school on foot." },
+                    { key: "C", text: "My brother goes to school by foot." },
+                    { key: "D", text: "My brother goes to school with foot." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Anh trai của tớ đi bộ đi học.",
+                    vocab: [
+                        "A. 'by walking' không phải cách dùng chuẩn chỉ phổ thông.",
+                        "B. go to school on foot: đi bộ đi học bằng chân. (Đúng cụm từ cố định)",
+                        "C. 'by foot' là bẫy giới từ sai (xe cộ mới dùng by, đi bộ bắt buộc dùng on foot).",
+                        "D. Dùng giới từ 'with' sai quy tắc phương thức."
+                    ],
+                    whyCorrect: "Động từ hành động đơn lẻ 'walk to school' (đi bộ đến trường) tương đương hoàn toàn với cụm phương thức di chuyển 'go to school on foot'.",
+                    whyIncorrect: "C là bẫy cực kỳ phổ biến khiến học sinh hay nhầm vì nghĩ phương tiện hay cách đi nào cũng dùng giới từ 'by'."
+                }
+            },
+            {
+                id: 4,
+                prompt: "There are many flowers in our garden.<br>→ Our garden ....................................",
+                options: [
+                    { key: "A", text: "Our garden is many flowers." },
+                    { key: "B", text: "Our garden has many flowers." },
+                    { key: "C", text: "Our garden have many flowers." },
+                    { key: "D", text: "Our garden there are many flowers." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Có rất nhiều hoa ở trong khu vườn của chúng tôi.",
+                    vocab: [
+                        "A. Sai nghĩa logic (Khu vườn là nhiều bông hoa).",
+                        "B. Our garden has many flowers: Khu vườn của chúng tôi có nhiều hoa. (Đúng chia động từ số ít)",
+                        "C. Dùng 'have' cho ngôi chủ từ số ít 'Our garden' là sai.",
+                        "D. Lắp ghép thừa thãi từ ngữ cấu trúc câu."
+                    ],
+                    whyCorrect: "Sự hoán đổi kinh điển giữa câu tồn tại và câu sở hữu thuộc tính địa phương: 'There are + N số nhiều + in + Địa điểm số ít' chuyển đổi thành 'Địa điểm số ít + has + N số nhiều'.",
+                    whyIncorrect: "C sai chia động từ theo chủ ngữ số ít. A và D sai cấu trúc câu cơ bản."
+                }
+            },
+            {
+                id: 5,
+                prompt: "Does your father cycle to work?<br>→ Does your father get....................................",
+                options: [
+                    { key: "A", text: "Does your father get to work by bicycle?" },
+                    { key: "B", text: "Does your father get to work on bicycle?" },
+                    { key: "C", text: "Does your father get to work with bicycle?" },
+                    { key: "D", text: "Does your father get to work cycle?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Bố của bạn có đạp xe đi làm hay không?",
+                    vocab: [
+                        "A. get to work by bicycle: đi làm bằng xe đạp. (Đúng giới từ chỉ phương tiện)",
+                        "B, C dùng sai giới từ quy ước cho xe đạp.",
+                        "D. Sắp đặt từ loại sai cấu trúc câu nghi vấn."
+                    ],
+                    whyCorrect: "Động từ hành vi 'cycle to work' (đạp xe đi làm) chuyển dịch tương đương sang cấu trúc cụm cách thức di chuyển 'get to work by bicycle' hoặc 'by bike'.",
+                    whyIncorrect: "Các phương án B, C, D sử dụng sai loại từ bổ trợ hoặc sai giới từ chỉ phương tiện cơ giới thô sơ."
+                }
+            },
+            {
+                id: 6,
+                prompt: "The garden is behind Nam's classroom.<br>→ Nam's classroom....................................",
+                options: [
+                    { key: "A", text: "Nam's classroom is next to the garden." },
+                    { key: "B", text: "Nam's classroom is in front of the garden." },
+                    { key: "C", text: "Nam's classroom is opposite the garden." },
+                    { key: "D", text: "Nam's classroom is under the garden." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Khu vườn nằm ở phía sau phòng học của Nam.",
+                    vocab: [
+                        "A. next to: bên cạnh.",
+                        "B. in front of: ở phía trước. (Trái nghĩa hoàn toàn với behind)",
+                        "C. opposite: đối diện.",
+                        "D. under: ở bên dưới."
+                    ],
+                    whyCorrect: "Mối quan hệ không gian đối lập hai chiều: Nếu vật A ở phía sau (behind) vật B, thì chắc chắn ngược lại vật B phải nằm ở vị trí phía trước (in front of) vật A.",
+                    whyIncorrect: "Các từ chỉ vị trí A, C, D làm thay đổi hoàn toàn bản chất sắp đặt hình ảnh không gian của câu hỏi gốc."
+                }
+            },
+            {
+                id: 7,
+                prompt: "Tom drives to work every morning.<br>→ Tom travels ....................................",
+                options: [
+                    { key: "A", text: "Tom travels to work by car every morning." },
+                    { key: "B", text: "Tom travels to work on car every morning." },
+                    { key: "C", text: "Tom travels to work by driving every morning." },
+                    { key: "D", text: "Tom travels to work in car every morning." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Tom tự lái xe ô tô đi làm vào mỗi buổi sáng.",
+                    vocab: [
+                        "A. travels to work by car: đi làm bằng xe hơi ô tô. (Chính xác cụm giới từ)",
+                        "B, C, D dùng sai định dạng từ loại hoặc sai giới từ chỉ phương tiện di chuyển."
+                    ],
+                    whyCorrect: "Hành động 'drive to work' mặc định mang nghĩa tự mình điều khiển xe ô tô đi làm. Khi sử dụng từ chuyển động rộng 'travel', ta bù đắp phương tiện bằng cụm 'by car'.",
+                    whyIncorrect: "Các phương án khác dùng giới từ sai quy ước chỉ phương tiện xe cộ di động khách quan."
+                }
+            },
+            {
+                id: 8,
+                prompt: "There are four people in her family.<br>→ Her family....................................",
+                options: [
+                    { key: "A", text: "Her family have four people." },
+                    { key: "B", text: "Her family has four people." },
+                    { key: "C", text: "Her family is four people." },
+                    { key: "D", text: "Her family there are four people." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Có bốn người ở trong gia đình của cô ấy.",
+                    vocab: [
+                        "A. Dùng 'have' chưa tối ưu (vì xem gia đình là một đơn vị tập thể số ít).",
+                        "B. Her family has four people: Gia đình cô ấy có 4 thành viên. (Đúng quy tắc hòa hợp số ít)",
+                        "C, D cấu tạo câu sai cấu trúc ngữ pháp chuyển đổi."
+                    ],
+                    whyCorrect: "Chuyển câu tồn tại sang dạng sở hữu số ít của danh từ tập hợp: 'There are + con số + people in + her family' hoán đổi thành mẫu 'Her family + has + con số + people'.",
+                    whyIncorrect: "A chưa chuẩn hóa chia động từ ngôi số ít cho danh từ tập hợp gia đình. C và D lỗi dùng từ loại."
+                }
+            },
+            {
+                id: 9,
+                prompt: "Does your class have twenty - five students?<br>→ Are ....................................",
+                options: [
+                    { key: "A", text: "Are there twenty - five students in your class?" },
+                    { key: "B", text: "Are there twenty - five students of your class?" },
+                    { key: "C", text: "Are your class have twenty - five students?" },
+                    { key: "D", text: "Are twenty - five students in your class have?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Lớp học của bạn có 25 học sinh phải không?",
+                    vocab: [
+                        "A. Are there twenty - five students in your class?: Có 25 học sinh trong lớp của bạn phải không? (Đúng câu hỏi tồn tại)",
+                        "B. Dùng sai giới từ 'of' chỉ vị trí lớp học.",
+                        "C, D đặt câu sai lệch nghiêm trọng trật tự từ nghi vấn."
+                    ],
+                    whyCorrect: "Chuyển đổi câu hỏi nghi vấn từ thể sở hữu sang câu hỏi tồn tại số nhiều: 'Does + S số ít + have + lượng N?' viết thành 'Are there + lượng N số nhiều + in + địa điểm?'.",
+                    whyIncorrect: "Các phương án khác thiếu thành phần cấu trúc 'there' hoặc sử dụng sai giới từ liên kết vị trí không gian."
+                }
+            },
+            {
+                id: 10,
+                prompt: "He goes to work at seven fifteen.<br>→ He goes to work at a ....................................",
+                options: [
+                    { key: "A", text: "He goes to work at a quarter past seven." },
+                    { key: "B", text: "He goes to work at a quarter to seven." },
+                    { key: "C", text: "He goes to work at a fifteen past seven." },
+                    { key: "D", text: "He goes to work at a half past seven." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Anh ấy đi làm vào lúc bảy giờ mười lăm phút.",
+                    vocab: [
+                        "A. a quarter past seven: 7 giờ 15 phút (7 giờ hơn một phần tư). (Đúng quy ước cách nói giờ hơn)",
+                        "B. a quarter to seven: 7 giờ kém 15 phút (tức là 6 giờ 45 phút).",
+                        "C. Dùng 'fifteen past' ghép mạo từ 'a' là sai quy ước nói giờ.",
+                        "D. a half past seven: 7 giờ rưỡi (7 giờ 30 phút)."
+                    ],
+                    whyCorrect: "Trong quy ước xem giờ tiếng Anh, khoảng mốc 15 phút được gọi là 'a quarter'. Khi nói giờ hơn (7:15), ta dùng công thức chuẩn: 'a quarter past + số giờ (seven)'.",
+                    whyIncorrect: "B sai lệch mốc phút giờ kém. C sai từ loại danh mục. D sai lệch mốc thời gian giờ rưỡi (30 phút)."
+                }
+            },
+            {
+                id: 11,
+                prompt: "My room is smaller than your room.<br>→ Your room ....................................",
+                options: [
+                    { key: "A", text: "Your room is more big than my room." },
+                    { key: "B", text: "Your room is bigger than my room." },
+                    { key: "C", text: "Your room is smaller than my room." },
+                    { key: "D", text: "Your room is biger than my room." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Phòng của tớ thì nhỏ hơn phòng của cậu.",
+                    vocab: [
+                        "A. Dùng 'more big' sai quy tắc tính từ ngắn.",
+                        "B. Your room is bigger than my room: Phòng của cậu to hơn phòng của tớ. (Đúng chính tả gấp đôi chữ g)",
+                        "C. Giữ nguyên từ 'smaller' làm câu bị ngược nghĩa phi logic.",
+                        "D. 'biger' viết sai chính tả (tính từ ngắn kết thúc bằng 1 nguyên âm + 1 phụ âm phải nhân đôi phụ âm cuối trước khi thêm -er)."
+                    ],
+                    whyCorrect: "Quy luật đổi tính từ trái nghĩa trong câu so sánh hơn: 'A + be + smaller than + B' sẽ tương đồng logic với cấu trúc 'B + be + bigger than + A'.",
+                    whyIncorrect: "A và D lỗi hình thái từ so sánh tính từ ngắn. C lỗi phản logic ý nghĩa đời sống."
+                }
+            },
+            {
+                id: 12,
+                prompt: "No house in the street is older than this house.<br>→ This house....................................",
+                options: [
+                    { key: "A", text: "This house is the oldest house in the street." },
+                    { key: "B", text: "This house is the most old house in the street." },
+                    { key: "C", text: "This house is older than no house in the street." },
+                    { key: "D", text: "This house is the oldest house on the street." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Không có ngôi nhà nào trên con phố cổ kính hơn ngôi nhà này.",
+                    vocab: [
+                        "A. This house is the oldest house in the street: Ngôi nhà này là cổ nhất phố. (Bảo lưu nguyên vẹn giới từ in)",
+                        "B. Dùng 'most old' sai quy tắc so sánh nhất tính từ ngắn.",
+                        "C. Sắp xếp cấu từ sai lệch ngữ nghĩa câu.",
+                        "D. Thay đổi giới từ gốc từ 'in the street' sang 'on the street' (Chưa sát văn bản đề bài yêu cầu tối ưu)."
+                    ],
+                    whyCorrect: "Viết lại câu so sánh hơn mang tính phủ định tuyệt đối không ai bằng thành câu so sánh nhất danh vị: 'No + N + be + older than + Vật' chuyển hóa thành 'Vật + be + the oldest + N'.",
+                    whyIncorrect: "B sai hình thái từ so sánh nhất. C lỗi logic ngữ nghĩa. D thay đổi cấu trúc giới từ so với đề."
+                }
+            },
+            {
+                id: 13,
+                prompt: "Hang is the fattest girl in my class.<br>→ No girl....................................",
+                options: [
+                    { key: "A", text: "No girl in my class is fatter than Hang." },
+                    { key: "B", text: "No girl in my class is more fat than Hang." },
+                    { key: "C", text: "No girl in my class is the fattest than Hang." },
+                    { key: "D", text: "No girl in my class is as fat than Hang." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Hằng là cô gái béo nhất trong lớp học của tôi.",
+                    vocab: [
+                        "A. No girl in my class is fatter than Hang: Không có ai trong lớp béo hơn Hằng. (Đúng ngữ pháp so sánh hơn)",
+                        "B. Dùng 'more fat' sai quy tắc so sánh tính từ ngắn.",
+                        "C. Trộn lẫn sai trái hình thức so sánh nhất và so sánh hơn.",
+                        "D. Dùng sai cặp từ so sánh bằng (phải là as...as chứ không dùng as...than)."
+                    ],
+                    whyCorrect: "Chuyển dịch từ câu so sánh nhất sang cấu trúc câu so sánh hơn mang ý nghĩa phủ định bắt đầu bằng từ phủ phủ định tuyệt đối: 'No girl in my class + be + fatter than + Hang'.",
+                    whyIncorrect: "Các phương án B, C, D đều áp dụng sai lệch quy luật cấu tạo của hệ thống ngữ pháp so sánh tính từ."
+                }
+            },
+            {
+                id: 14,
+                prompt: "How many classes are there in your school?<br>→ How many classes does ....................................",
+                options: [
+                    { key: "A", text: "How many classes does your school have?" },
+                    { key: "B", text: "How many classes does your school has?" },
+                    { key: "C", text: "How many classes does there are in your school?" },
+                    { key: "D", text: "How many classes does your school there contain?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Có bao nhiêu lớp học ở trong trường của bạn thế?",
+                    vocab: [
+                        "A. How many classes does your school have?: Trường của bạn có bao nhiêu lớp học? (Đúng cấu trúc động từ nguyên thể)",
+                        "B. Dùng động từ chia 'has' sau trợ động từ 'does' là sai quy tắc.",
+                        "C, D phối hợp từ lộn xộn, sai ngữ pháp.",
+                    ],
+                    whyCorrect: "Biến đổi câu hỏi tồn tại số nhiều sang dạng câu hỏi sở hữu của chủ ngữ số ít 'your school': 'How many + N số nhiều + are there in + địa điểm?' đổi thành 'How many + N số nhiều + does + địa điểm số ít + have?'.",
+                    whyIncorrect: "B sai vì nguyên tắc sau trợ động từ nghi vấn 'does', động từ chính bắt buộc phải đưa về thể nguyên mẫu 'have'."
+                }
+            },
+            {
+                id: 15,
+                prompt: "Peter is Mary's brother.<br>→ Mary ....................................",
+                options: [
+                    { key: "A", text: "Mary is Peter's brother." },
+                    { key: "B", text: "Mary is Peter's sister." },
+                    { key: "C", text: "Mary has a brother Peter." },
+                    { key: "D", text: "Mary is sister of Peter." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Peter là anh trai/em trai của Mary.",
+                    vocab: [
+                        "A. Sai giới tính nhân vật (Mary là con gái không thể đóng vai trò làm brother).",
+                        "B. Mary is Peter's sister: Mary là chị/em gái của Peter. (Đúng quan hệ sở hữu cách)",
+                        "C, D cách diễn đạt từ loại lộn xộn hoặc kém tự nhiên so với sở hữu cách."
+                    ],
+                    whyCorrect: "Dựa vào mối quan hệ ruột thịt và phân định giới tính: Nếu Peter là nam và là anh/em trai của Mary, thì suy ra ngược lại Mary phải là chị/em gái (sister) của Peter.",
+                    whyIncorrect: "A sai từ vựng quan hệ giới tính. C và D sai lệch quy ước cấu từ miêu tả ngắn gọn dạng sở hữu."
+                }
+            },
+            {
+                id: 16,
+                prompt: "My house has four floors.<br>→ There....................................",
+                options: [
+                    { key: "A", text: "There is four floors in my house." },
+                    { key: "B", text: "There are four floors in my house." },
+                    { key: "C", text: "There have four floors in my house." },
+                    { key: "D", text: "There are four floors of my house." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Ngôi nhà của tôi có bốn tầng lầu.",
+                    vocab: [
+                        "A. Dùng động từ số ít 'is' cho 4 tầng lầu là sai.",
+                        "B. There are four floors in my house: Có 4 tầng lầu trong ngôi nhà của tôi. (Đúng ngữ pháp số nhiều)",
+                        "C. Sai cấu trúc liên kết từ 'There have'.",
+                        "D. Dùng giới từ 'of' chỉ thuộc tính chưa tối ưu bằng giới từ không gian chứa đựng 'in'."
+                    ],
+                    whyCorrect: "Công thức hoán đổi câu thuộc tính sở hữu sang thể câu tồn tại số nhiều: 'S + has + lượng số nhiều + N' biến đổi đồng nghĩa thành mẫu 'There are + lượng số nhiều + N + in + sở hữu chủ'.",
+                    whyIncorrect: "A sai chia động từ tobe số đếm. C lỗi chắp vá cấu trúc. D dùng sai giới từ không gian định vị."
+                }
+            },
+            {
+                id: 17,
+                prompt: "Mr. and Mrs. Black have a son, John.<br>→ John is....................................",
+                options: [
+                    { key: "A", text: "John is Mr. and Mrs. Black's son." },
+                    { key: "B", text: "John is son of Mr. and Mrs. Black." },
+                    { key: "C", text: "John is Mr. and Mrs. Black son." },
+                    { key: "D", text: "John is Mr. and Mrs. Black's daughter." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Ông và bà Black có một người con trai tên là John.",
+                    vocab: [
+                        "A. John is Mr. and Mrs. Black's son: John là con trai của ông bà Black. (Đúng quy tắc sở hữu cách danh từ ghép liệt kê)",
+                        "B. Cách viết chưa tối ưu hóa ngắn gọn.",
+                        "C. Thiếu kí tự dấu sở hữu cách 's ở cuối tên chủ thể.",
+                        "D. Sai từ vựng quan hệ (daughter là con gái, trong khi John đề bài cho là son)."
+                    ],
+                    whyCorrect: "Sử dụng sở hữu cách đối với danh từ ghép liệt kê nhiều người chung quyền sở hữu: dấu phẩy biểu thị sở hữu cách 's sẽ đặt ở vị trí người cuối cùng trong danh sách (Black's son).",
+                    whyIncorrect: "C thiếu dấu sở hữu. D đổi sai bản chất từ vựng giới tính nhân vật."
+                }
+            },
+            {
+                id: 18,
+                prompt: "Mr. Ba rides his motorbike to work everyday.<br>→ Mr. Ba gets....................................",
+                options: [
+                    { key: "A", text: "Mr. Ba gets to work by motorbike everyday." },
+                    { key: "B", text: "Mr. Ba gets to work on motorbike everyday." },
+                    { key: "C", text: "Mr. Ba gets to work with motorbike everyday." },
+                    { key: "D", text: "Mr. Ba gets work by motorbike everyday." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Ông Ba đi xe máy của ông ấy đi làm mỗi ngày.",
+                    vocab: [
+                        "A. gets to work by motorbike: đi làm bằng phương tiện xe máy. (Đúng cấu trúc hướng đi và giới từ)",
+                        "B, C sử dụng sai quy ước giới từ đi kèm xe máy.",
+                        "D. Thiếu giới từ chỉ hướng 'to' sau hành động di chuyển get."
+                    ],
+                    whyCorrect: "Cụm động từ hành vi cụ thể 'ride his motorbike to work' (lái xe máy đi làm) chuyển hóa sang cách nói chỉ phương tiện di chuyển tổng thể 'get to work by motorbike'.",
+                    whyIncorrect: "Các câu khác thiếu từ nối chỉ hướng đích đến hoặc chọn sai giới từ bổ trợ xe cộ."
+                }
+            },
+            {
+                id: 19,
+                prompt: "The children are walking to school now.<br>→ The children are going to ....................................",
+                options: [
+                    { key: "A", text: "The children are going to school by walk now." },
+                    { key: "B", text: "The children are going to school on foot now." },
+                    { key: "C", text: "The children are going to school by foot now." },
+                    { key: "D", text: "The children are going to school walking now." }
+                ],
+                correctKey: "B",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Các em nhỏ đang đi bộ tới trường học ngay lúc này.",
+                    vocab: [
+                        "A. Cụm 'by walk' hoàn toàn sai ngữ pháp.",
+                        "B. are going to school on foot now: đang đi học bằng cách đi bộ. (Đúng cụm từ cố định cố hữu)",
+                        "C. Bẫy giới từ sai 'by foot' không có ý nghĩa.",
+                        "D. Sắp đặt sai lệch trật tự từ bổ trợ thì tiếp diễn."
+                    ],
+                    whyCorrect: "Dạng thức tiếp diễn của hành động đi bộ 'are walking to school' được viết lại tương đương bằng công thức chuyển động 'are going to school on foot'. Trạng từ 'now' giữ nguyên.",
+                    whyIncorrect: "C là bẫy giới từ phổ biến cần ghi nhớ, đi bằng chân luôn luôn đi kèm giới từ 'on foot'."
+                }
+            },
+            {
+                id: 20,
+                prompt: "Nam is tall. Hung is taller.<br>→ Hung ....................................",
+                options: [
+                    { key: "A", text: "Hung is taller than Nam." },
+                    { key: "B", text: "Hung is more tall than Nam." },
+                    { key: "C", text: "Hung is as tall as Nam." },
+                    { key: "D", text: "Hung is taller Nam." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Nam thì cao. Hùng thì cao hơn.",
+                    vocab: [
+                        "A. Hung is taller than Nam: Hùng thì cao hơn Nam. (Đúng ngữ pháp so sánh hơn tính từ ngắn)",
+                        "B. Dùng 'more tall' sai quy tắc chia tính từ ngắn.",
+                        "C. Đổi thành so sánh bằng làm câu sai lệch thông tin dữ kiện.",
+                        "D. Thiếu từ nối liên kết so sánh bắt buộc phải có là 'than'."
+                    ],
+                    whyCorrect: "Nối hai mệnh đề chứa thuộc tính kích thước thành câu so sánh hơn hoàn chỉnh: 'Chủ ngữ 1 (Hung) + be + tính từ ngắn thêm đuôi er (taller) + than + Chủ ngữ 2 (Nam)'.",
+                    whyIncorrect: "B lỗi từ loại. C lỗi logic thông tin đề bài. D thiếu liên từ ngữ pháp kết nối đối tượng."
+                }
+            },
+            {
+                id: 21,
+                prompt: "Let's go camping<br>→ Why....................................",
+                options: [
+                    { key: "A", text: "Why don't we go camping?" },
+                    { key: "B", text: "Why we don't go camping?" },
+                    { key: "C", text: "Why not to go camping?" },
+                    { key: "D", text: "Why don't we going camping?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Chúng mình hãy cùng đi cắm trại đi nào!",
+                    vocab: [
+                        "A. Why don't we go camping Nano?: Tại sao chúng ta không đi cắm trại nhỉ? (Đúng câu hỏi đề xuất gợi ý)",
+                        "B. Sai trật tự đảo ngữ câu nghi vấn nghi thức.",
+                        "C. Sau cụm từ hỏi rút gọn 'Why not', động từ đi kèm trực tiếp nguyên mẫu không 'to'.",
+                        "D. Dùng động từ đuôi -ing 'going' sau trợ động từ khuyết thiếu là sai trái."
+                    ],
+                    whyCorrect: "Cấu trúc đưa ra lời đề xuất rủ rê tập thể tương đương trong tiếng Anh tiểu học: 'Let's + V-inf' chuyển dịch đồng nghĩa sang dạng câu hỏi mẫu 'Why don't we + V-inf?'.",
+                    whyIncorrect: "Các phương án B, C, D đều vi phạm quy tắc cấu tạo khung cú pháp của câu hỏi ý kiến gợi ý."
+                }
+            },
+            {
+                id: 22,
+                prompt: "How much is a bottle of cooking oil?<br>→ How much does ....................................",
+                options: [
+                    { key: "A", text: "How much does a bottle of cooking oil cost?" },
+                    { key: "B", text: "How much does a bottle of cooking oil costs?" },
+                    { key: "C", text: "How much does a bottle of cooking oil is?" },
+                    { key: "D", text: "How much does a bottle of cooking oil price?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Một chai dầu ăn có giá bao nhiêu tiền?",
+                    vocab: [
+                        "A. How much does a bottle of cooking oil cost?: Một chai dầu ăn giá bao nhiêu? (Đúng động từ nguyên thể cost)",
+                        "B. Động từ chưa bỏ đuôi 's' sau khi mượn trợ động từ làm câu sai.",
+                        "C. Dùng thừa thãi động từ tobe 'is' đi chung trợ động từ hệ hiện tại đơn.",
+                        "D. Dùng danh từ 'price' đặt ở vị trí chức năng động từ hành vi câu này là sai."
+                    ],
+                    whyCorrect: "Hai phương thức hỏi giá tiền vật dụng phổ biến: 'How much + be + Danh từ?' viết lại bằng cấu trúc dùng trợ động từ 'How much + do/does + Danh từ + cost?' (Chai dầu ăn số ít nên mượn does).",
+                    whyIncorrect: "B quên không nguyên thể hóa động từ chính. C và D lỗi dùng sai loại từ vựng bổ trợ."
+                }
+            },
+            {
+                id: 23,
+                prompt: "What time does she go to work?<br>→ When....................................",
+                options: [
+                    { key: "A", text: "When does she go to work?" },
+                    { key: "B", text: "When she goes to work?" },
+                    { key: "C", text: "When time does she go to work?" },
+                    { key: "D", text: "When does she goes to work?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Cô ấy đi làm vào lúc mấy giờ?",
+                    vocab: [
+                        "A. When does she go to work?: Khi nào cô ấy đi làm? (Đúng ngữ pháp câu hỏi thời gian)",
+                        "B. Thiếu trợ động từ đảo ngữ 'does' của cấu trúc câu hỏi nghi vấn.",
+                        "C. Cụm từ hỏi lai căng 'When time' không tồn tại.",
+                        "D. Chia thừa đuôi 'es' ở động từ chính sau trợ động từ."
+                    ],
+                    whyCorrect: "Từ hỏi mốc thời gian cụ thể 'What time' hoàn toàn có thể được bao quát đồng nghĩa bằng trạng từ nghi vấn chỉ thời điểm chung rộng hơn là 'When' trong cấu trúc hiện tại đơn.",
+                    whyIncorrect: "Các phương án khác viết thiếu trợ động từ hoặc chia sai động từ chính gốc của câu."
+                }
+            },
+            {
+                id: 24,
+                prompt: "She likes noodles.<br>→ Her favorite....................................",
+                options: [
+                    { key: "A", text: "Her favorite food is noodles." },
+                    { key: "B", text: "Her favorite food are noodles." },
+                    { key: "C", text: "Her favorite drink is noodles." },
+                    { key: "D", text: "Her favorite noodle is she." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Cô ấy thích ăn món mì sợi.",
+                    vocab: [
+                        "A. Her favorite food is noodles: Món ăn yêu thích của cô ấy là mì. (Đúng ngữ pháp danh từ chỉ món ăn)",
+                        "B. Dùng 'are' chưa chuẩn vì cụm danh từ làm chủ ngữ chính thức xét đến là 'Her favorite food' (số ít).",
+                        "C. Sai danh mục từ vựng ngữ cảnh (mì là đồ ăn 'food' chứ không thể là đồ uống 'drink').",
+                        "D. Đảo lộn vị trí từ vựng vô nghĩa."
+                    ],
+                    whyCorrect: "Mối liên hệ giữa động từ biểu đạt sở thích: 'S + like(s) + loại đồ ăn' biến đổi sang dạng kết cấu tính từ sở hữu đặc trưng 'Sở hữu + favorite food + is + món ăn'.",
+                    whyIncorrect: "B sai chia động từ liên kết. C chọn sai nhóm phân loại thực phẩm đời sống."
+                }
+            },
+            {
+                id: 25,
+                prompt: "What is the price of these apples?<br>→ How much ....................................",
+                options: [
+                    { key: "A", text: "How much are these apples?" },
+                    { key: "B", text: "How much is these apples?" },
+                    { key: "C", text: "How much does these apples cost?" },
+                    { key: "D", text: "How much these apples are price?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Những quả táo này có giá bao nhiêu tiền vậy?",
+                    vocab: [
+                        "A. How much are these apples?: Những quả táo này giá bao nhiêu? (Đúng ngữ pháp số nhiều những quả táo)",
+                        "B. Dùng động từ số ít 'is' cho danh từ số nhiều 'these apples' là sai.",
+                        "C. Mượn trợ động từ số ít 'does' cho danh từ số nhiều (Muốn dùng động từ cost phải mượn trợ động từ do).",
+                        "D. Diễn đạt sai cấu trúc câu hỏi giá."
+                    ],
+                    whyCorrect: "Chuyển câu hỏi giá cả danh từ số nhiều từ danh ứng sang dạng từ nghi vấn How much: 'What is the price of + N số nhiều?' hoán đổi thành công thức 'How much + are + N số nhiều?'.",
+                    whyIncorrect: "Các phương án B, C dùng sai hình thái từ số ít cho danh từ chỉ định số nhiều."
+                }
+            },
+            {
+                id: 26,
+                prompt: "It's often hot in the summer.<br>→ It's hardly ever....................................",
+                options: [
+                    { key: "A", text: "It's hardly ever cold in the summer." },
+                    { key: "B", text: "It's hardly ever hot in the summer." },
+                    { key: "C", text: "It's hardly ever warm in the summer." },
+                    { key: "D", text: "It's hardly ever sunny in the summer." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Trời thường xuyên nóng nực vào mùa hè.",
+                    vocab: [
+                        "A. It's hardly ever cold in the summer: Trời hầu như không bao giờ lạnh vào mùa hè. (Hợp lý logic trái nghĩa)",
+                        "B. Phản logic ngữ nghĩa thực tế (Mùa hè hầu như không nóng là sai thực tế).",
+                        "C. Sai sắc thái dải đo thời tiết.",
+                        "D. Sai lệch logic khí hậu mùa hè."
+                    ],
+                    whyCorrect: "Sử trạng từ tần suất mang tính phủ định 'hardly ever' (hầu như không bao giờ) kết hợp tính từ trái nghĩa 'cold' (lạnh) để giữ nguyên ý nghĩa câu gốc 'thường xuyên nóng' (often hot).",
+                    whyIncorrect: "Các phương án B, C, D phá hủy tính đúng đắn và chuẩn xác về mặt ý nghĩa logic của hiện tượng khí hậu thời tiết."
+                }
+            },
+            {
+                id: 27,
+                prompt: "The Mekong river is longer than the red river.<br>→ The red river....................................",
+                options: [
+                    { key: "A", text: "The Red River is shorter than the Mekong River." },
+                    { key: "B", text: "The Red River is more short than the Mekong River." },
+                    { key: "C", text: "The Red River is longer than the Mekong River." },
+                    { key: "D", text: "The Red River is as long as the Mekong River." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Sông Mê Kông thì dài hơn sông Hồng.",
+                    vocab: [
+                        "A. The Red River is shorter than the Mekong River: Sông Hồng ngắn hơn sông Mê Kông. (Đúng tính từ ngắn short)",
+                        "B. Dùng 'more short' sai quy tắc chia tính từ ngắn.",
+                        "C. Đảo chủ ngữ nhưng giữ nguyên tính từ làm câu sai lệch thông tin địa lý.",
+                        "D. Chuyển thành so sánh bằng làm thay đổi bản chất mức độ."
+                    ],
+                    whyCorrect: "Quy luật hoán đổi cặp từ trái nghĩa trong câu so sánh hơn: 'S1 + be + longer than + S2' viết lại tương đương thành cấu trúc 'S2 + be + shorter than + S1' (long trái nghĩa short).",
+                    whyIncorrect: "B lỗi chính tả ngữ pháp tính từ ngắn. C và D viết sai bản chất thông tin đo lường chiều dài dòng sông."
+                }
+            },
+            {
+                id: 28,
+                prompt: "What is the width of the Great wall?<br>→ How....................................",
+                options: [
+                    { key: "A", text: "How wide is the Great Wall?" },
+                    { key: "B", text: "How width is the Great Wall?" },
+                    { key: "C", text: "How big is the Great Wall width?" },
+                    { key: "D", text: "How long is the Great Wall width?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Chiều rộng của Vạn Lý Trường Thành là bao nhiêu?",
+                    vocab: [
+                        "A. How wide is the Great Wall?: Vạn Lý Trường Thành rộng bao nhiêu? (Đúng cấu trúc How + tính từ)",
+                        "B. Dùng danh từ 'width' đứng sau từ hỏi How là sai quy tắc hệ thống.",
+                        "C, D chắp vá từ vựng sai cấu trúc ngữ pháp cơ bản hỏi kích cỡ."
+                    ],
+                    whyCorrect: "Chuyển đổi từ hỏi kích thước bề ngang từ danh từ sang tính từ tương đương: 'What is the + danh từ (width) + of + Vật?' viết lại thành 'How + tính từ (wide) + be + Vật?'.",
+                    whyIncorrect: "B lỗi nhầm lẫn chức năng từ loại danh tính. C và D dùng từ hỏi sai mục đích kích thước bề ngang."
+                }
+            },
+            {
+                id: 29,
+                prompt: "Phuong has a brother, Nam.<br>→ Phuong is ....................................",
+                options: [
+                    { key: "A", text: "Phuong is Nam's sister." },
+                    { key: "B", text: "Phuong is Nam's brother." },
+                    { key: "C", text: "Phuong is sister of Nam." },
+                    { key: "D", text: "Phuong is Nam sister." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Phương có một người anh/em trai tên là Nam.",
+                    vocab: [
+                        "A. Phuong is Nam's sister: Phương là chị/em gái của Nam. (Đúng sở hữu cách quan hệ)",
+                        "B. Sai giới tính nhân vật Phương (Phương có anh trai là Nam thì Phương phải đóng vai trò là sister).",
+                        "C. Diễn đạt dài dòng chưa tối ưu.",
+                        "D. Thiếu kí tự dấu sở hữu cách 's ngữ pháp."
+                    ],
+                    whyCorrect: "Từ thông tin Nam là con trai và là anh em ruột của Phương, suy luận ngược lại Phương mang giới tính nữ và đóng vai trò là chị/em gái (sister) của Nam, thể hiện bằng cụm sở hữu cách 'Nam's sister'.",
+                    whyIncorrect: "B sai từ vựng quan hệ giới tính. D lỗi ngữ pháp viết thiếu dấu định vị sở hữu."
+                }
+            },
+            {
+                id: 30,
+                prompt: "We usually ride to school.<br>→ We usually go....................................",
+                options: [
+                    { key: "A", text: "We usually go to school by bike." },
+                    { key: "B", text: "We usually go school by bike." },
+                    { key: "C", text: "We usually go to school on bike." },
+                    { key: "D", text: "We usually go to school with bike." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Chúng tôi thường đạp xe đi học.",
+                    vocab: [
+                        "A. go to school by bike: đi học bằng phương tiện xe đạp. (Đúng hoàn toàn cấu trúc cụm)",
+                        "B. Thiếu giới từ chỉ hướng 'to' đứng liền sau hành động di chuyển go.",
+                        "C, D áp dụng sai giới từ đi kèm phương tiện cơ giới thô sơ xe đạp."
+                    ],
+                    whyCorrect: "Động từ 'ride to school' tự thân mang nghĩa đạp xe đạp đến trường. Khi biến đổi sang động từ đi chung phương tiện 'go', ta dùng cấu trúc 'go to school by bike' hoặc 'by bicycle'.",
+                    whyIncorrect: "B lỗi thiếu từ nối không gian hướng vị trí. C và D lỗi giới từ chỉ phương tiện cộ."
+                }
+            },
+            {
+                id: 31,
+                prompt: "The school is big.<br>→ It is ....................................",
+                options: [
+                    { key: "A", text: "It is a big school." },
+                    { key: "B", text: "It is big school." },
+                    { key: "C", text: "It is an big school." },
+                    { key: "D", text: "It is the school big." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Ngôi trường này thì to lớn.",
+                    vocab: [
+                        "A. It is a big school: Nó là một ngôi trường lớn. (Đúng trật tự mạo từ, tính từ đứng trước danh từ)",
+                        "B. Thiếu mạo từ đơn vị số ít 'a' bắt buộc phải có.",
+                        "C. Dùng sai mạo từ 'an' (tính từ big bắt đầu bằng phụ âm b nên chỉ đi kèm mạo từ a).",
+                        "D. Sắp đặt vị trí tính từ sai quy tắc đứng sau danh từ."
+                    ],
+                    whyCorrect: "Biến đổi câu chứa tính từ vị ngữ đứng sau tobe thành cụm danh từ định ngữ bổ trợ: 'The + N + be + Adj' viết lại thành mẫu câu giới thiệu 'It is + a/an + Adj + N'.",
+                    whyIncorrect: "Phương án B lỗi danh từ đếm được số ít không đứng độc lập trơ trọi khi chưa có mạo từ hạn định số lượng đi kèm."
+                }
+            },
+            {
+                id: 32,
+                prompt: "Apple juice is her favorite drink.<br>→ She....................................",
+                options: [
+                    { key: "A", text: "She likes apple juice best." },
+                    { key: "B", text: "She likes best apple juice." },
+                    { key: "C", text: "She favorites apple juice." },
+                    { key: "D", text: "She is favorite apple juice." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Nước ép táo là đồ uống yêu thích nhất của cô ấy.",
+                    vocab: [
+                        "A. She likes apple juice best: Cô ấy thích nước ép táo nhất. (Đúng ngữ pháp trạng từ đứng cuối câu)",
+                        "B. Đặt trạng từ 'best' sai vị trí xen ngang giữa động từ chính và tân ngữ trực tiếp.",
+                        "C. Dùng từ 'favorite' làm chức năng động từ trong câu là sai loại từ.",
+                        "D. Diễn đạt sai cấu trúc ý nghĩa tâm lý."
+                    ],
+                    whyCorrect: "Cấu trúc đảo ngữ sở thích đồ vật thức uống: 'Đồ uống + be + sở hữu + favorite drink' đồng nghĩa viết lại bằng mệnh đề tâm lý hành động 'S + like(s) + đồ uống + best' (thích cái đó nhất).",
+                    whyIncorrect: "B lỗi vị trí từ. C nhầm lẫn phân loại chức năng từ vựng ngữ pháp của từ favorite."
+                }
+            },
+            {
+                id: 33,
+                prompt: "How many oranges do you want?<br>→ How many oranges would....................................",
+                options: [
+                    { key: "A", text: "How many oranges would you like?" },
+                    { key: "B", text: "How many oranges would you want?" },
+                    { key: "C", text: "How many oranges would you like to?" },
+                    { key: "D", text: "How many oranges would do you want?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Bạn muốn có bao nhiêu quả cam thế?",
+                    vocab: [
+                        "A. How many oranges would you like?: Bạn muốn bao nhiêu quả cam? (Đúng cấu trúc lịch sự trang trọng)",
+                        "B. Cụm lai căng 'would you want' không tự nhiên.",
+                        "C. Thừa kí tự từ nối 'to' ở cuối câu hỏi khi không có động từ hành động theo sau.",
+                        "D. Trộn lẫn sai trái cấu trúc trợ động từ."
+                    ],
+                    whyCorrect: "Động từ mong muốn phổ thông 'want' trong câu hỏi số lượng được thay thế bằng cấu trúc nhã nhặn, lịch sự và trang trọng hơn trong giao tiếp là cụm cấu trúc khuyết thiếu 'would like'.",
+                    whyIncorrect: "Các phương án khác cấu tạo sai lệch vị trí từ bổ trợ hoặc thừa thãi từ nối ở cuối câu hỏi."
+                }
+            },
+            {
+                id: 34,
+                prompt: "How much is a bowl of noodles?<br>→ How much does ....................................",
+                options: [
+                    { key: "A", text: "How much does a bowl of noodles cost?" },
+                    { key: "B", text: "How much does a bowl of noodles costs?" },
+                    { key: "C", text: "How much does a bowl of noodles price?" },
+                    { key: "D", text: "How much does a bowl of noodles is?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Một bát mì giá bao nhiêu tiền vậy?",
+                    vocab: [
+                        "A. How much does a bowl of noodles cost?: Một bát mì giá bao nhiêu? (Đúng động từ nguyên mẫu cost)",
+                        "B. Chưa đưa động từ về thể nguyên mẫu sau trợ động từ does.",
+                        "C. Dùng từ 'price' ở chức năng động từ hành vi câu hỏi giá là sai.",
+                        "D. Chắp vá sai lệch động từ tobe 'is' đi liền kề trợ động từ hệ hiện tại đơn."
+                    ],
+                    whyCorrect: "Cấu trúc hoán đổi câu hỏi giá cả danh từ số ít (a bowl of noodles): 'How much + is + N?' viết lại tương đương thành công thức động từ 'How much + does + N + cost?'.",
+                    whyIncorrect: "Phương án B vi phạm luật chia động từ nguyên mẫu trong cấu trúc câu hỏi nghi vấn mượn trợ động từ."
+                }
+            },
+            {
+                id: 35,
+                prompt: "Why don't we sing an English song?<br>→ What about....................................",
+                options: [
+                    { key: "A", text: "What about singing an English song?" },
+                    { key: "B", text: "What about to sing an English song?" },
+                    { key: "C", text: "What about sing an English song?" },
+                    { key: "D", text: "What about we sing an English song?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Tại sao chúng ta không hát một bài hát tiếng Anh nhỉ?",
+                    vocab: [
+                        "A. What about singing an English song?: Còn việc hát một bài hát tiếng Anh thì sao? (Đúng cấu trúc V-ing)",
+                        "B. Dùng động từ dạng 'to-sing' sau giới từ là sai quy tắc.",
+                        "C. Dùng động từ nguyên mẫu bare-inf 'sing' đứng sau giới từ là sai.",
+                        "D. Cấu từ mệnh đề sau cụm what about chưa đúng quy chuẩn ngữ pháp tiểu học."
+                    ],
+                    whyCorrect: "Chuyển đổi cấu trúc câu đề xuất gợi ý rủ rê hành động: 'Why don't we + V-inf?' tương đương hoàn toàn với công thức danh động từ đứng sau giới từ 'What about + V-ing?' hoặc 'How about + V-ing?'.",
+                    whyIncorrect: "Các phương án B, C, D đều vi phạm quy tắc bắt buộc động từ phải biến đổi sang hình thái danh động từ đuôi -ing sau giới từ 'about'."
+                }
+            },
+            {
+                id: 36,
+                prompt: "My sister cycles to the supermarket.<br>→ My sister goes....................................",
+                options: [
+                    { key: "A", text: "My sister goes to the supermarket by bike." },
+                    { key: "B", text: "My sister goes to the supermarket on bike." },
+                    { key: "C", text: "My sister goes the supermarket by bike." },
+                    { key: "D", text: "My sister goes to the supermarket by cycles." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Chị gái/em gái của tôi đạp xe đi đến siêu thị.",
+                    vocab: [
+                        "A. goes to the supermarket by bike: đi siêu thị bằng xe đạp. (Đúng cấu trúc hướng đi và phương tiện)",
+                        "B. Sử dụng sai giới từ chỉ phương tiện cộ.",
+                        "C. Thiếu giới từ chỉ hướng đích đến 'to' đứng sau hành động đi go.",
+                        "D. Từ vựng phương tiện biến đổi sai lệch ngữ cảnh."
+                    ],
+                    whyCorrect: "Hành động động từ đơn tính 'cycle to + địa điểm' chuyển nghĩa đồng dạng sang tổ hợp cụm từ di chuyển 'go to + địa điểm + by bike' (đi bằng phương tiện xe đạp).",
+                    whyIncorrect: "Các câu khác thiếu từ nối liên kết không gian hướng vị trí hoặc lỗi áp dụng sai giới từ xe cộ."
+                }
+            },
+            {
+                id: 37,
+                prompt: "The country is great.<br>→ It's....................................",
+                options: [
+                    { key: "A", text: "It's a great country." },
+                    { key: "B", text: "It's great country." },
+                    { key: "C", text: "It's an great country." },
+                    { key: "D", text: "It's the country great." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Đất nước này thật tuyệt vời.",
+                    vocab: [
+                        "A. It's a great country: Đó là một đất nước tuyệt vời. (Đúng cấu trúc ngữ pháp danh từ số ít)",
+                        "B. Thiếu thành phần mạo từ đơn vị số ít 'a' chỉ số lượng đếm được.",
+                        "C. Dùng mạo từ 'an' sai trước phụ âm đầu g của tính từ great.",
+                        "D. Sắp đặt tính từ đứng sau danh từ là sai trật tự bổ ngữ."
+                    ],
+                    whyCorrect: "Biến đổi câu miêu tả tính chất thuộc tính danh từ sang cụm danh từ giới thiệu định danh câu: 'The + N + be + Adj' viết lại thành công thức 'It's + a/an + Adj + N'.",
+                    whyIncorrect: "Phương án B lỗi danh từ đếm được số ít không đứng độc lập trơ trọi khi chưa có mạo từ hạn định số lượng đi kèm bổ sung."
+                }
+            },
+            {
+                id: 38,
+                prompt: "The girls are beautiful.<br>→ They're ....................................",
+                options: [
+                    { key: "A", text: "They're beautiful girls." },
+                    { key: "B", text: "They're a beautiful girls." },
+                    { key: "C", text: "They're beautifuls girls." },
+                    { key: "D", text: "They're girl beautifuls." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Những cô gái đó thật xinh đẹp.",
+                    vocab: [
+                        "A. They're beautiful girls: Họ là những cô gái xinh đẹp. (Tính từ đứng trước danh từ số nhiều đúng ngữ pháp)",
+                        "B. Mạo từ số ít 'a' đi chung danh từ số nhiều 'girls' là sai số lượng.",
+                        "C. Sai vì thêm đuôi s vào tính từ 'beautifuls' (Tính từ không bao giờ chia số nhiều).",
+                        "D. Sắp đặt trật tự từ bổ nghĩa sai lệch."
+                    ],
+                    whyCorrect: "Biến đổi câu định tính số nhiều: 'The + N số nhiều + are + Adj' viết lại thành 'They are + Adj + N số nhiều'. Tuyệt đối không thêm mạo từ số ít và không chia s cho tính từ.",
+                    whyIncorrect: "B lỗi mâu thuẫn từ hạn định lượng. C lỗi chia số nhiều cho tính từ sai quy ước ngôn ngữ."
+                }
+            },
+            {
+                id: 39,
+                prompt: "The Amazon River is longer than the Mekong River.<br>→ The Mekong River....................................",
+                options: [
+                    { key: "A", text: "The Mekong River is shorter than the Amazon River." },
+                    { key: "B", text: "The Mekong River is longer than the Amazon River." },
+                    { key: "C", text: "The Mekong River is more short than the Amazon River." },
+                    { key: "D", text: "The Mekong River is not longer the Amazon River." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Sông A-ma-dôn dài hơn sông Mê Kông.",
+                    vocab: [
+                        "A. The Mekong River is shorter than the Amazon River: Sông Mê Kông ngắn hơn sông A-ma-dôn. (Đúng ngữ pháp tính từ ngắn)",
+                        "B. Đảo lộn thông tin dữ kiện thực tế so sánh độ dài dòng sông đề bài đưa ra.",
+                        "C. Dùng hình thái 'more short' sai quy tắc cấu cấu từ.",
+                        "D. Thiếu liên từ so sánh bắt buộc có 'than' ở cuối câu để liên kết đối tượng."
+                    ],
+                    whyCorrect: "Nguyên tắc đảo ngôi chủ từ trong câu so sánh hơn dùng cặp tính từ đối lập hoàn toàn: 'S1 + be + longer than + S2' viết lại tương đương thành câu 'S2 + be + shorter than + S1'.",
+                    whyIncorrect: "B sai bản chất dữ liệu logic. C viết sai chính tả hình thái từ tính từ ngắn."
+                }
+            },
+            {
+                id: 40,
+                prompt: "Minh is shorter than Nam.<br>→ Nam is....................................",
+                options: [
+                    { key: "A", text: "Nam is taller than Minh." },
+                    { key: "B", text: "Nam is short than Minh." },
+                    { key: "C", text: "Nam is more tall than Minh." },
+                    { key: "D", text: "Nam is tall than Minh." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Minh thì thấp lùn hơn Nam.",
+                    vocab: [
+                        "A. Nam is taller than Minh: Nam thì cao hơn Minh. (Đúng tính từ ngắn tall tương phản)",
+                        "B. Sai lệch bản chất thông tin chiều cao đối chiếu của hai người.",
+                        "C. Dùng 'more tall' sai quy tắc cấu từ loại tính từ ngắn.",
+                        "D. Thiếu đuôi so sánh hơn '-er' của tính từ ngắn gắn liền cấu trúc."
+                    ],
+                    whyCorrect: "Quy tắc chuyển đổi ngôi và áp dụng tính từ đối lập chiều cao trong so sánh hơn: Thấp hơn (shorter than) hoán đổi ngôi sẽ thành cao hơn (taller than).",
+                    whyIncorrect: "Các câu còn lại dùng sai từ vựng thuộc tính chiều cao hoặc viết thiếu hậu tố so sánh hơn của tính từ ngắn."
+                }
+            },
+            {
+                id: 41,
+                prompt: "Miss White is younger than Mrs. Green.<br>→ Mrs. Green is....................................",
+                options: [
+                    { key: "A", text: "Mrs. Green is older than Miss White." },
+                    { key: "B", text: "Mrs. Green is more old than Miss White." },
+                    { key: "C", text: "Mrs. Green is younger than Miss White." },
+                    { key: "D", text: "Mrs. Green is old than Miss White." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Cô White thì trẻ tuổi hơn bà Green.",
+                    vocab: [
+                        "A. Mrs. Green is older than Miss White: Bà Green thì nhiều tuổi già hơn cô White. (Đúng từ loại và ý nghĩa tương phản)",
+                        "B. Dùng dạng thức 'more old' sai cấu trúc tính từ ngắn.",
+                        "C. Giữ nguyên tính từ trẻ làm câu bị phản logic tuổi tác đảo lộn.",
+                        "D. Quên chưa chia đuôi so sánh hơn '-er' của tính từ ngắn."
+                    ],
+                    whyCorrect: "Cặp tính từ đối lập độ tuổi: Trẻ hơn (younger than) khi hoán chuyển vị trí hai chủ thể sẽ tương đương logic hoàn toàn với cụm từ nhiều tuổi già hơn (older than).",
+                    whyIncorrect: "B, C, D lỗi sai cấu tạo từ vựng câu so sánh hơn hoặc đảo lộn thông tin độ tuổi nhân vật."
+                }
+            },
+            {
+                id: 42,
+                prompt: "There is a lot of rain in Viet Nam.<br>→ Viet Nam ....................................",
+                options: [
+                    { key: "A", text: "Viet Nam has a lot of rain." },
+                    { key: "B", text: "Viet Nam have a lot of rain." },
+                    { key: "C", text: "Viet Nam is a lot of rain." },
+                    { key: "D", text: "Viet Nam rains a lot of." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Có rất nhiều mưa ở đất nước Việt Nam.",
+                    vocab: [
+                        "A. Viet Nam has a lot of rain: Việt Nam có nhiều mưa. (Đúng quy tắc chia động từ ngôi số ít)",
+                        "B. Dùng động từ 'have' sai sự hòa hợp chủ từ số ít quốc gia quốc tịch.",
+                        "C. Sai nghĩa thuộc tính định dạng biểu cảm không gian.",
+                        "D. Từ nối 'of' đặt sai vị trí trơ trọi ở cuối câu."
+                    ],
+                    whyCorrect: "Chuyển đổi từ câu tồn tại khí hậu sang dạng thuộc tính sở hữu vùng miền: 'There is + a lot of rain + in + Tên quốc gia' viết lại thành 'Tên quốc gia số ít + has + a lot of rain'.",
+                    whyIncorrect: "B sai chia động từ theo chủ từ đơn vị đơn lẻ. D lỗi sắp xếp liên từ giới từ kết cấu câu."
+                }
+            },
+            {
+                id: 43,
+                prompt: "My room is smaller than your room.<br>→ Your room ....................................",
+                options: [
+                    { key: "A", text: "Your room is bigger than my room." },
+                    { key: "B", text: "Your room is smaller than my room." },
+                    { key: "C", text: "Your room is more big than my room." },
+                    { key: "D", text: "Your room is biger than my room." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Phòng của tớ thì nhỏ hơn phòng của cậu.",
+                    vocab: [
+                        "A. Your room is bigger than my room: Phòng của cậu to hơn phòng của tớ. (Đúng ngữ pháp so sánh hơn)",
+                        "B, C, D lỗi hình thái tính từ ngắn hoặc đảo lộn sai nghĩa logic tương phản đối lập."
+                    ],
+                    whyCorrect: "Áp dụng nguyên tắc đảo ngữ câu so sánh hơn chứa tính từ đối lập: Nhỏ hơn (smaller than) hoán đổi vị trí thành to lớn hơn (bigger than).",
+                    whyIncorrect: "Các phương án còn lại lỗi viết sai chính tả chữ bigger hoặc sai lệch ngữ lý đời sống thực tế."
+                }
+            },
+            {
+                id: 44,
+                prompt: "No house on the street is older than this house.<br>→ This house....................................",
+                options: [
+                    { key: "A", text: "This house is the oldest house on the street." },
+                    { key: "B", text: "This house is the oldest house in the street." },
+                    { key: "C", text: "This house is more old than any house on the street." },
+                    { key: "D", text: "This house is the most oldest house on the street." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Không có ngôi nhà nào trên con phố cổ kính hơn ngôi nhà này.",
+                    vocab: [
+                        "A. This house is the oldest house on the street: Nhà này cổ nhất trên phố. (Giữ trọn vẹn giới từ gốc on)",
+                        "B. Thay đổi giới từ gốc 'on' thành 'in' (Chưa sát văn bản đề bài yêu cầu tối ưu nhất).",
+                        "C. Sai hình thái cấu tạo từ loại so sánh hơn.",
+                        "D. Dùng thừa thãi cả 'most' lẫn 'oldest' sai nguyên tắc."
+                    ],
+                    whyCorrect: "Biến đổi câu so sánh tuyệt đối phủ định chứa giới từ cụ thể sang câu so sánh nhất danh vị: 'No house on the street... -> This house is the oldest house on the street.'",
+                    whyIncorrect: "B lỗi biến đổi giới từ nền tảng. D lỗi lặp cấu trúc so sánh cấp độ cao nhất vô nghĩa."
+                }
+            },
+            {
+                id: 45,
+                prompt: "The bookstore is to the left of his house.<br>→ His house ....................................",
+                options: [
+                    { key: "A", text: "His house is to the right of the bookstore." },
+                    { key: "B", text: "His house is to the left of the bookstore." },
+                    { key: "C", text: "His house is next to the bookstore." },
+                    { key: "D", text: "His house is behind the bookstore." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Hiệu sách nằm ở phía bên trái ngôi nhà của anh ấy.",
+                    vocab: [
+                        "A. His house is to the right of the bookstore: Nhà anh ấy nằm bên phải hiệu sách. (Đúng vị trí không gian đối chiếu đối xứng)",
+                        "B. Giữ nguyên hướng trái làm hình ảnh không gian bị đảo lộn sai lệch thực tế.",
+                        "C. next to: bên cạnh (Chưa đủ độ chính xác định vị hướng đi bằng câu gốc).",
+                        "D. behind: ở phía sau."
+                    ],
+                    whyCorrect: "Quy luật hướng không gian phẳng đối xứng: Nếu vật A nằm ở phía bên trái (to the left of) vật B, thì suy luận ngược lại vật B bắt buộc phải ở vị trí phía bên phải (to the right of) vật A.",
+                    whyIncorrect: "Các câu B, C, D chỉ sai hướng hoặc làm mất đi tính chính xác tuyệt đối của thông tin định vị ban đầu."
+                }
+            },
+            {
+                id: 46,
+                prompt: "The building is tall.<br>→ It's ....................................",
+                options: [
+                    { key: "A", text: "It's a tall building." },
+                    { key: "B", text: "It's tall building." },
+                    { key: "C", text: "It's an tall building." },
+                    { key: "D", text: "It's building tall." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Tòa nhà đó thì cao lớn.",
+                    vocab: [
+                        "A. It's a tall building: Đó là một tòa nhà cao tầng. (Đúng trật tự mạo từ, tính từ đứng trước danh từ số ít)",
+                        "B. Thiếu thành phần mạo từ đơn vị số ít 'a' chỉ số lượng đếm được.",
+                        "C. Dùng mạo từ 'an' sai trước phụ âm đầu t của tính từ tall.",
+                        "D. Sắp xếp sai trật tự từ loại bổ trợ."
+                    ],
+                    whyCorrect: "Biến đổi câu cơ bản cấu trúc vị ngữ sang cụm danh từ giới thiệu đặc điểm: 'The + N + be + Adj' chuyển đổi tương đương thành dạng 'It's + a/an + Adj + N'.",
+                    whyIncorrect: "Phương án B vi phạm lỗi danh từ đếm được số ít không đứng độc lập trơ trọi khi chưa có mạo từ đi kèm bổ sung."
+                }
+            },
+            {
+                id: 47,
+                prompt: "Tom drives to work every morning.<br>→ Tom travels ....................................",
+                options: [
+                    { key: "A", text: "Tom travels to work by car every morning." },
+                    { key: "B", text: "Tom travels to work by driving every morning." },
+                    { key: "C", text: "Tom travels to work on car every morning." },
+                    { key: "D", text: "Tom travels to work in car every morning." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Tom tự lái xe ô tô đi làm mỗi buổi sáng.",
+                    vocab: [
+                        "A. Tom travels to work by car every morning: Tom đi làm bằng xe hơi... (Đúng cụm giới từ chỉ phương tiện)",
+                        "B, C, D diễn đạt sai quy tắc ngữ pháp bổ trợ xe cộ."
+                    ],
+                    whyCorrect: "Chuyển từ động từ hành động tự lái xe 'drive to work' sang tổ hợp cách thức di chuyển bổ sung phương tiện giao thông 'travel to work by car'.",
+                    whyIncorrect: "Các phương án khác dùng sai cấu trúc giới từ quy định cụ thể cho xe hơi ô tô."
+                }
+            },
+            {
+                id: 48,
+                prompt: "This box has twenty packets of tea.<br>→ There....................................",
+                options: [
+                    { key: "A", text: "There are twenty packets of tea in this box." },
+                    { key: "B", text: "There is twenty packets of tea in this box." },
+                    { key: "C", text: "There have twenty packets of tea in this box." },
+                    { key: "D", text: "There are twenty packets of tea of this box." }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Chiếc hộp này có chứa hai mươi gói trà.",
+                    vocab: [
+                        "A. There are twenty packets of tea in this box: Có 20 gói trà trong chiếc hộp này. (Đúng ngữ pháp số nhiều packets)",
+                        "B. Dùng động từ số ít 'is' lỗi nghiêm trọng số lượng số đếm.",
+                        "C. Sai lỗi cấu trúc cụm từ tồn tại 'There have'.",
+                        "D. Dùng sai giới từ không gian chứa đựng vật thể bên trong (dùng of thay vì in)."
+                    ],
+                    whyCorrect: "Biến đổi câu sở hữu sang câu tồn tại số nhiều: 'S (vật chứa) + has + lượng số nhiều + N' chuyển đổi thành 'There are + lượng số nhiều + N + in + vật chứa'.",
+                    whyIncorrect: "B sai hòa hợp số lượng đếm danh từ packets. C và D lỗi cấu trúc cấu thành ngữ nghĩa giới từ vị trí."
+                }
+            },
+            {
+                id: 49,
+                prompt: "What is the price of the two notebooks?<br>→ How....................................",
+                options: [
+                    { key: "A", text: "How much are the two notebooks?" },
+                    { key: "B", text: "How much is the two notebooks?" },
+                    { key: "C", text: "How price are the two notebooks?" },
+                    { key: "D", text: "How much does the two notebooks cost?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Giá tiền của hai cuốn sổ tay này là bao nhiêu?",
+                    vocab: [
+                        "A. How much are the two notebooks?: Hai cuốn sổ này giá bao nhiêu tiền? (Đúng ngữ pháp số nhiều notebooks)",
+                        "B. Dùng sai hệ động từ số ít 'is' cho hai cuốn sổ.",
+                        "C. Kết hợp từ hỏi sai quy tắc từ loại cấu thành câu.",
+                        "D. Dùng trợ động từ số ít 'does' cho danh từ số nhiều (Muốn đúng động từ cost phải mượn trợ động từ do)."
+                    ],
+                    whyCorrect: "Công thức hỏi giá cả danh từ số nhiều liệt kê: 'What is the price of + N số nhiều?' chuyển tương đương thành mẫu câu 'How much + are + N số nhiều?'.",
+                    whyIncorrect: "B và D nhầm lẫn số lượng chủ ngữ số nhiều của những cuốn sổ tay để chọn sai động từ bổ trợ."
+                }
+            },
+            {
+                id: 50,
+                prompt: "Does your school have over eight hundred students?<br>→ Are ....................................",
+                options: [
+                    { key: "A", text: "Are there over eight hundred students in your school?" },
+                    { key: "B", text: "Are there over eight hundred students of your school?" },
+                    { key: "C", text: "Are over eight hundred students in your school have?" },
+                    { key: "D", text: "Are over eight hundred students there in your school?" }
+                ],
+                correctKey: "A",
+                explanation: {
+                    translation: "Dịch nghĩa câu gốc: Trường của bạn có trên tám trăm học sinh phải không?",
+                    vocab: [
+                        "A. Are there over eight hundred students in your school?: Có trên 800 học sinh trong trường bạn phải không? (Chuẩn xác cấu trúc câu hỏi tồn tại)",
+                        "B. Dùng sai giới từ 'of' liên kết thuộc tính sở hữu.",
+                        "C, D cấu tạo kết cấu câu sai trật tự từ đảo ngữ nghi vấn câu hỏi."
+                    ],
+                    whyCorrect: "Chuyển đổi câu hỏi nghi vấn từ thể sở hữu sang thể tồn tại số nhiều: 'Does + địa điểm + have + số lượng danh từ?' biến đổi thành 'Are there + số lượng danh từ + in + địa điểm?'.",
+                    whyIncorrect: "Các phương án khác sắp xếp từ ngữ lộn xộn hoặc dùng sai giới từ định vị không gian trường học khách quan."
+                }
+            }
+        ];
+
+        // Khởi tạo bộ máy giải mã âm thanh Web Audio API thuần (Không dùng file ngoài)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.08); // G5
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.35);
+            } else if (type === 'wrong') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(220.00, audioCtx.currentTime); // A3
+                osc.frequency.linearRampToValueAtTime(130.81, audioCtx.currentTime + 0.4); // C3
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.45);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.45);
+            }
+        }
+
+        // Hiệu ứng pháo giấy Confetti mừng chiến thắng
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let confettiArray = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function triggerConfetti() {
+            confettiArray = [];
+            for (let i = 0; i < 110; i++) {
+                confettiArray.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    r: Math.random() * 6 + 4,
+                    d: Math.random() * canvas.height,
+                    color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+                    tilt: Math.random() * 10 - 5,
+                    tiltAngleIncremental: Math.random() * 0.07 + 0.02,
+                    tiltAngle: 0
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let active = false;
+            confettiArray.forEach((p) => {
+                p.tiltAngle += p.tiltAngleIncremental;
+                p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                p.x += Math.sin(p.tiltAngle);
+                p.tilt = Math.sin(p.tiltAngle - p.r / 2) * 5;
+
+                if (p.y <= canvas.height) active = true;
+
+                ctx.beginPath();
+                ctx.lineWidth = p.r;
+                ctx.strokeStyle = p.color;
+                ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                ctx.stroke();
+            });
+            if (active) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        // Thuật toán xáo trộn vị trí đáp án ngẫu nhiên
+        function shuffleOptions(array) {
+            let currentIndex = array.length, temporaryValue, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+            return array;
+        }
+
+        let studentAnswersLog = {};
+
+        // Hàm kết xuất vẽ giao diện danh sách câu hỏi ra màn hình
+        function compileQuizInterface() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = "";
+
+            quizDatabase.forEach((q, index) => {
+                studentAnswersLog[q.id] = null;
+
+                const randomizedOptions = shuffleOptions([...q.options]);
+
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.id = `card-block-${q.id}`;
+
+                let gridHTML = "";
+                randomizedOptions.forEach((opt) => {
+                    gridHTML += `
+                        <button class="option-btn" id="opt-node-${q.id}-${opt.key}" onclick="verifyUserSelection(${q.id}, '${opt.key}', '${q.correctKey}')">
+                            <strong>${opt.key}.</strong> ${opt.text}
+                        </button>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="question-header">
+                        <span class="badge">Câu ${index + 1}</span>
+                        <div class="question-text">${q.prompt}</div>
+                    </div>
+                    <div class="options-grid">
+                        ${gridHTML}
+                    </div>
+                    <div class="explanation-box" id="explain-box-${q.id}">
+                        <div class="exp-title">💡 Giải Thích Chi Tiết Từ Ms Lê Hằng English:</div>
+                        <div class="exp-section"><strong>1. Dịch nghĩa câu hỏi gốc ban đầu:</strong><br>${q.explanation.translation}</div>
+                        <div class="exp-section">
+                            <strong>2. Liệt kê phân tích ngữ nghĩa 4 lựa chọn:</strong>
+                            <div class="sub-options-desc">
+                                ${q.explanation.vocab.join('<br>')}
+                            </div>
+                        </div>
+                        <div class="exp-section"><strong>3. Vì sao đáp án [${q.correctKey}] chuẩn xác:</strong><br>${q.explanation.whyCorrect}</div>
+                        <div class="exp-section"><strong>4. Tại sao 3 đáp án còn lại hoàn toàn SAI:</strong><br>${q.explanation.whyIncorrect}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Sửa lỗi cú pháp cốt lõi tại hàm này giúp chạy mượt mà ổn định
+        function verifyUserSelection(questionId, userKey, correctKey) {
+            if (studentAnswersLog[questionId] !== null) return;
+
+            const card = document.getElementById(`card-block-${questionId}`);
+            const selectedBtn = document.getElementById(`opt-node-${questionId}-${userKey}`);
+            const correctBtn = document.getElementById(`opt-node-${questionId}-${correctKey}`);
+            const explanationBlock = document.getElementById(`explain-box-${questionId}`);
+
+            const buttons = card.querySelectorAll('.option-btn');
+            buttons.forEach(b => b.classList.add('disabled'));
+
+            if (userKey === correctKey) {
+                studentAnswersLog[questionId] = true;
+                selectedBtn.classList.add('correct');
+                playSound('correct');
+                triggerConfetti();
+            } else {
+                studentAnswersLog[questionId] = false;
+                selectedBtn.classList.add('wrong');
+                correctBtn.classList.add('correct');
+                card.classList.add('shake');
+                playSound('wrong');
+                setTimeout(() => card.classList.remove('shake'), 450);
+            }
+
+            // Hiện giải thích siêu chi tiết ngay lập tức sau khi bấm chọn
+            explanationBlock.style.display = "block";
+        }
+
+        // Tính điểm tổng kết cuối bài
+        function calculateFinalScore() {
+            let total = quizDatabase.length;
+            let correctCount = 0;
+            let answeredCount = 0;
+
+            for (const id in studentAnswersLog) {
+                if (studentAnswersLog[id] !== null) {
+                    answeredCount++;
+                    if (studentAnswersLog[id] === true) {
+                        correctCount++;
+                    }
+                }
+            }
+
+            if (answeredCount < total) {
+                alert(`Học sinh ơi, con mới làm được ${answeredCount}/${total} câu thôi! Hãy hoàn thành nốt tất cả các câu hỏi rồi mới nộp bài tổng kết nhé! 💕`);
+                return;
+            }
+
+            const percentage = (correctCount / total) * 100;
+            let feedbackText = "";
+
+            if (percentage < 50) {
+                feedbackText = "Điểm lần này chưa cao lắm, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+            } else if (percentage >= 60 && percentage <= 80) {
+                feedbackText = "Con đã có tiến bộ khá ổn rồi, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+            } else if (percentage >= 90) {
+                feedbackText = "Làm tốt lắm, con cố gắng ring điểm 10 ở lần sau nha!";
+            } else {
+                feedbackText = "Con đã có nền tảng tương đối tốt, hãy rà soát lại các từ vựng chưa nhớ và đọc kỹ lời dặn của cô để bứt phá điểm 10 lần tới nhé!";
+            }
+
+            document.getElementById('score-text').innerText = `${correctCount} / ${total}`;
+            document.getElementById('comment-text').innerText = `Lời khuyên từ Ms Lê Hằng: "${feedbackText}"`;
+            
+            document.getElementById('result-modal').classList.add('show');
+            if(percentage >= 60) {
+                triggerConfetti();
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('result-modal').classList.remove('show');
+        }
+
+        function reloadQuizEngine() {
+            closePopup();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            compileQuizInterface();
+        }
+
+        window.onload = function() {
+            compileQuizInterface();
+        };
+    </script>
+</body>
+</html>
